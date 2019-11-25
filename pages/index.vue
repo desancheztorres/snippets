@@ -8,6 +8,11 @@
 <script>
 
 export default {
-  components: {}
+  head () {
+    return {
+      title: 'Snippets by Desancheztorres',
+      titleTemplate: null,
+    }
+  }
 }
 </script>
