@@ -16,7 +16,8 @@
     "dotenv": "^8.2.0",
     "nuxt": "^2.0.0",
     "tailwindcss": "^1.1.2",
-    "tailwindcss-transforms": "^2.2.0"
+    "tailwindcss-transforms": "^2.2.0",
+    "lodash": "latest"
   },
   "devDependencies": {
     "node-sass": "^4.12.0",
