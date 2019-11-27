@@ -118,7 +118,7 @@
                                         'font-bold': currentStep.uuid === step.uuid
                                     }"
                                 >
-                                    {{ index + 1 }} {{ step.title }}
+                                    {{ index + 1 }} {{ step.title || 'untitled step' }}
                                 </nuxt-link>
                             </li>
                         </ul>
@@ -144,6 +144,12 @@
                 snippet: null,
                 steps: []
             }
+        },
+
+        head() {
+          return {
+              title: `Editing ${this.snippet.title || 'Untitled snippet'}`
+          }
         },
 
         watch: {
