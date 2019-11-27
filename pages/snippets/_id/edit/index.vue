@@ -1,5 +1,7 @@
 <template>
     <div>
+        {{ snippet }}
+
         <div class="bg-white mb-16">
             <div class="container py-10 pb-16">
                 <div class="w-10/12">
@@ -9,6 +11,7 @@
                             class="text-4xl text-gray-700 font-medium font-header leading-tight mb-4 w-full block p-2 border-2 rounded border-dashed border-gray-400"
                             value=""
                             placeholder="Unititled snippet"
+                            v-model="snippet.title"
                     />
 
                     <div class="text-gray-600">
@@ -126,3 +129,22 @@
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        data () {
+            return {
+                snippet: null,
+                steps: []
+            }
+        },
+        async asyncData({app, params}) {
+            let snippet = await app.$axios.$get(`snippets/${params.id}`)
+
+            return {
+                snippet: snippet.data,
+                steps: snippet.data.steps.data
+            }
+        }
+    }
+</script>
