@@ -1,9 +1,6 @@
 <template>
     <div>
         <div class="bg-white mb-16">
-            {{ steps }}
-            <hr>
-            {{ currentStep }}
             <div class="container py-10 pb-16">
                 <div class="w-10/12">
 
@@ -156,7 +153,18 @@
                         title
                     })
                 }, 500)
-            }
+            },
+
+            currentStep: {
+              deep: true,
+
+              handler: _debounce(async function (step) {
+                await this.$axios.$patch(`snippets/${this.snippet.uuid}/steps/${step.uuid}`, {
+                    title: step.title,
+                    body: step.body,
+                })
+              }, 500)
+            },
         },
 
         computed: {
