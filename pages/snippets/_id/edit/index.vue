@@ -23,7 +23,7 @@
     <div class="container">
       <div class="flex items-center mb-6">
         <div class="text-xl text-gray-600 font-medium font-header mr-3">
-          {{ currentStepIndex + 1}}/{{ steps.length }}.
+          {{ currentStepIndex + 1 }}/{{ steps.length }}.
         </div>
 
         <input
@@ -40,9 +40,7 @@
           class="w-full lg:w-8/12 lg:mr-16 flex flex-wrap lg:flex-no-wrap justify-between items-start mb-8"
         >
           <div class="flex flex-row lg:flex-col mr-2 order-first">
-            <StepNavigationButton
-                :step="previousStep"
-            >
+            <StepNavigationButton :step="previousStep">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -87,19 +85,17 @@
           <div
             class="flex flex-row-reverse lg:flex-col order-first lg:order-last"
           >
-              <StepNavigationButton
-                      :step="nextStep"
+            <StepNavigationButton :step="nextStep">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                class="fill-current text-white h-6 w-6"
               >
-                  <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          class="fill-current text-white h-6 w-6"
-                  >
-                      <path
-                              d="M18.59 13H3a1 1 0 0 1 0-2h15.59l-5.3-5.3a1 1 0 1 1 1.42-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.42-1.4l5.3-5.3z"
-                      />
-                  </svg>
-              </StepNavigationButton>
+                <path
+                  d="M18.59 13H3a1 1 0 0 1 0-2h15.59l-5.3-5.3a1 1 0 1 1 1.42-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.42-1.4l5.3-5.3z"
+                />
+              </svg>
+            </StepNavigationButton>
 
             <nuxt-link
               :to="{}"
@@ -174,9 +170,8 @@
 <script>
 import StepList from "../components/StepList";
 import StepNavigationButton from "../components/StepNavigationButton";
-import { orderBy as _orderBy } from "lodash";
 import { debounce as _debounce } from "lodash";
-
+import browseSnippet from "@/mixins/snippets/browseSnippet";
 
 export default {
   components: {
@@ -189,6 +184,8 @@ export default {
       steps: []
     };
   },
+
+  mixins: [browseSnippet],
 
   head() {
     return {
@@ -217,41 +214,6 @@ export default {
           }
         );
       }, 500)
-    }
-  },
-
-  computed: {
-    orderedStepsAsc() {
-      return _orderBy(this.steps, "order", "asc");
-    },
-
-    orderedStepsDesc() {
-      return _orderBy(this.steps, "order", "desc");
-    },
-
-    firstStep() {
-      return this.orderedStepsAsc[0];
-    },
-
-    nextStep() {
-      return this.orderedStepsAsc.find(s => s.order > this.currentStep.order) || null;
-    },
-
-    previousStep() {
-        return this.orderedStepsDesc.find(s => s.order < this.currentStep.order) || null;
-    },
-
-    currentStep() {
-      return (
-        this.orderedStepsAsc.find(s => s.uuid === this.$route.query.step) ||
-        this.firstStep
-      );
-    },
-
-    currentStepIndex () {
-      return this.orderedStepsAsc.map(
-              (s) => s.uuid
-      ).indexOf(this.currentStep.uuid)
     }
   },
 
