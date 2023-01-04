@@ -14,7 +14,7 @@
     "@nuxtjs/auth": "^4.8.4",
     "@nuxtjs/axios": "^5.8.0",
     "dotenv": "^8.2.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "tailwindcss": "^1.1.2",
     "tailwindcss-transforms": "^2.2.0",
     "lodash": "latest"
